@@ -1,0 +1,68 @@
+@import url("fonts.css");
+@import url("scrollbar.css");
+@import url("navbar.css");
+@import url("home/home.css");
+
+body {
+    background-color: #F6F9FD;
+    color: #2F2F2F;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+#fullWindow {
+    display: grid;
+    grid-template-rows: auto;
+}
+
+#titleBar {
+    -webkit-app-region: drag;
+    position: fixed;
+    width: 100%;
+    text-align: right;
+}
+
+#windowButtons {
+    padding: 0;
+    margin: 0;
+}
+
+#windowButtons button {
+    outline: 0;
+    border: 0;
+    background: none;
+    padding: 7px 15px 7px 15px;
+    transition: all 0.2s ease 0s;
+    -webkit-app-region: no-drag;
+}
+
+#minimize:hover {
+    background: #cecece;
+}
+
+#maximize:hover {
+    background: #cecece;
+}
+
+#close:hover {
+    background: #e62b23;
+    color: white;
+}
+
+#container {
+    display: grid;
+    padding: 4%;
+    grid-template-columns: 15% auto;
+}
+
+h1 {
+    font-family: Lato-Black;
+    letter-spacing: .5px;
+    font-size: 3em;
+}
+
+h2 {
+    font-family: Lato;
+    letter-spacing: .5px;
+}

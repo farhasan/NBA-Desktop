@@ -1,0 +1,20 @@
+nav a {
+    text-decoration: none;
+    color: #2F2F2F;
+}
+
+nav div {
+    padding: 0;
+    cursor: pointer;
+}
+
+nav h1 {
+    font-family: Lato-Light;
+    font-size: x-large;
+    letter-spacing: .5px;
+}
+
+nav div h1:hover{
+    transform: scale(1.1);
+    transition: transform 300ms linear;
+}
