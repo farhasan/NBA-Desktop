@@ -2,6 +2,8 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
 
+import getPics from './mainProcess/nbaData';
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -9,29 +11,6 @@ let mainWindow;
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
 if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
-
-const Scraper = require('image-scraper');
-const urls = [];
-
-function getPics() {
-  const scraper = new Scraper('https://www.nba.com');
-
-  let counter = 0;
-  let src;
-
-  return new Promise((resolve, reject) => scraper.scrape((image) => {
-    if (counter !== 3) {
-      src = image.attributes['data-srcset'];
-      if (src.includes('jpg')) {
-        counter += 1;
-        if (urls.length < 3) {
-          urls.push(`https://nba.com/${src.split(',')[3].split(' ')[1]}`);
-          resolve('successfully pushed url');
-        } else reject('rejecting promise');
-      }
-    }
-  }));
-}
 
 const createWindow = async () => {
   // Create the browser window.
@@ -49,8 +28,9 @@ const createWindow = async () => {
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
+  const splashUrls = [];
   ipcMain.on('requesting nba splash urls', (event, arg) => {
-    getPics().then(() => { mainWindow.webContents.send('sending nba splash urls', urls); }).catch();
+    getPics(splashUrls).then(() => { mainWindow.webContents.send('sending nba splash urls', splashUrls); }).catch();
   });
   // getPics().then(() => { mainWindow.webContents.send('sending pic urls', urls); }).catch();
   // getPics().then(() => { ipcMain.send('sending pic urls', urls); }).catch();
