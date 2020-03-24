@@ -1,7 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import { ipcRenderer } from 'electron';
+import PropTypes from 'prop-types';
 
-export default class Games extends React.Component {
+import { ipcRenderer } from 'electron';
+import { connect } from 'react-redux';
+
+class Games extends React.Component {
   componentDidMount() {
     ipcRenderer.send('requesting nba splash urls', 'sent successfully');
     ipcRenderer.on('sending nba splash urls', (event, arg) => {
@@ -14,6 +18,7 @@ export default class Games extends React.Component {
   }
 
   render() {
+    console.log(this.props.splashUrls);
     return (
       <div id="games">
         <h2>games</h2>
@@ -21,3 +26,16 @@ export default class Games extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    splashUrls: state.splashUrlReducer.defaultSplashUrls,
+  };
+}
+
+Games.propTypes = {
+  splashUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default connect(mapStateToProps)(Games);
+// export default Games;

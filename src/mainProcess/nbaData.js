@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 const Scraper = require('image-scraper');
 
 export default function getPics(urlArray) {
@@ -7,9 +8,9 @@ export default function getPics(urlArray) {
   let src;
 
   return new Promise((resolve, reject) => scraper.scrape((image) => {
-    if (counter !== 3) {
+    if (counter !== 3 && typeof image === 'object') {
       src = image.attributes['data-srcset'];
-      if (src.includes('jpg')) {
+      if (typeof src === 'string' && src.includes('jpg')) {
         counter += 1;
         if (urlArray.length < 3) {
           urlArray.push(`https://nba.com/${src.split(',')[3].split(' ')[1]}`);

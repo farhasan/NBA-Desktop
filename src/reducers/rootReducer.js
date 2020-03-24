@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 import dataReducers from './dataReducers';
 
-export default combineReducers({
-  splashUrls: dataReducers.splashUrlReducer,
-});
+// function exReducer(state = { 1: 'hello' }, action) {
+//   return state;
+// }
+
+export default combineReducers(
+  {
+    splashUrlReducer: dataReducers.splashUrlReducer,
+  },
+);

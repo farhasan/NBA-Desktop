@@ -4,6 +4,12 @@ const initialState = {
   ],
 };
 
-export default function splashUrlReducer(state = initialState, action) {
+function splashUrlReducer(state = initialState, action) {
   return state;
 }
+
+const dataReducers = {
+  splashUrlReducer,
+};
+
+export default dataReducers;
