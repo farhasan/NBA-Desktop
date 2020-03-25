@@ -17,11 +17,24 @@ class Games extends React.Component {
     ipcRenderer.removeListener('sending nba splash urls', () => console.log('removed'));
   }
 
+  createCaption(splashUrl) {
+    // might move this to main process
+    return (
+      <div className="splashText">
+        <p>Watch Lebron and the Lakers</p>
+      </div>
+    );
+  }
+
   render() {
     console.log(this.props.splashUrls);
+    const splashImages = this.props.splashUrls.map((url, index) => (<img className="splashImage" src={url} alt={`Splash ${index}`} />));
+    console.log(splashImages);
     return (
       <div id="games">
         <h2>games</h2>
+        {splashImages[0]}
+        {this.createCaption(this.props.splashUrls[0])}
       </div>
     );
   }

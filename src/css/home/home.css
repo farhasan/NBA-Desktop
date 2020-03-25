@@ -1,4 +1,42 @@
 #home {
     display: grid;
-    grid-template-rows: 1fr 4fr 1fr 1fr;
+    grid-template-rows: .5fr 2fr 1fr 1fr;
+}
+
+#games {
+    position: relative;
+}
+
+.splashImage {
+    max-width: 60%;
+    height: auto;
+    box-shadow: -1px 0px 15px -2px rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+
+.splashImage:hover{
+    transform: scale(.99);
+    transition: transform 300ms linear;
+}
+
+.splashImage:hover + .splashText {
+    transform: scale(.99);
+    transition: transform 300ms linear;
+}
+
+.splashText {
+    position: absolute;
+    font-family: Lato;
+    font-weight: bold;
+    font-size: xx-large;
+    color: #F5F5F5;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    bottom: 0;
+    left: 1.5%;
+}
+
+@media (max-width: 950px) {
+    .splashText {
+        font-size: x-large;
+    }
 }
